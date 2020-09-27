@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "EditMeet";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var Grps = (List<Ebiz.Models.MeetingMst>)ViewBag.Grps;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="cotact-area">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="title-area">
+                            <h2 class="title">Edit Group</h2>
+                            <span class="line"></span>
+
+                        </div>
+                    </div>
+                    <div class="contact-area-right">
+                        <form id="editMeet-form" name="editMeet-form" class="comments-form contact-form" novalidate>
+                            <div class="form-group">
+                                <input type="datetime" class="form-control" id="Date" name="Date" value="@Model.Date" maxlength="100" placeholder="Date">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Location" name="Location" value="@Model.Location" maxlength="100" placeholder="Location">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Desc" name="Desc" value="@Model.Desc" maxlength="100" placeholder="Description">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Select Group</label>
+                                <select class="form-control" name="Grps" id="Grps">
+                                    <option value="">Select</option>
+                                    @foreach (var res in Grps)
+                                    {
+                                        if (@res.Id == Model.Id)
+                                        {
+                                            <option selected="selected" value="@res.Id">@res.Id</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@res.Id">@res.Id</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Amount" name="Amount" value="@Model.Amount" maxlength="100" placeholder="Amount">
+                            </div>
+                            <input type="hidden" id="Id" name="Id" value="@Model.Id">
+                            <div>
+                                <button type="button" name="Save" id="Save" class="btn btn-general btn-white">Save</button>
+                            </div>
+
+                            <span id="ErrorMsg" style="color:red"></span>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        $(window).bind("beforeunload", function () {
+            return confirm("Do you really want to close?");
+        })
+        $(function () {
+
+            var $validator = $("#editMeet-form").validate({
+                // Rules for form validation
+                rules: {
+                    //Date: {
+                    //    required: true,
+                    //    Date:true
+                    //},
+                    //Location: {
+                    //    required:true
+                    //},
+                    //Desc: {
+                    //    required:true
+                    //},
+                    //Grps: {
+                    //    required:true
+                    //},
+                    //Amount: {
+                    //    required: true,
+                    //    number:true
+                    //}
+                },
+
+                 //Messages for form validation
+                messages: {
+                    //Date: {
+                    //    required: "Please Enter Date.",
+                    //    Date: "Please Enter a valid Date."
+                    //},
+                    //Location: {
+                    //    required: "Please Enter Location."
+                    //},
+                    //Desc: {
+                    //    required: "Please Enter Description."
+                    //},
+                    //Grps: {
+                    //    required: "Please Select a Group."
+                    //},
+                    //Amount: {
+                    //    required: "Please Enter the Amount",
+                    //    number: "Please Enter valid Numerical Amount"
+                    //}
+                },
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#Save").click(function () {
+                $("#ErrorMsg").html();
+                if ($("#editMeet-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("EditMeeting", "Admin")',
+                        data: {
+                            Date: $("#Date").val(), Location: $("#Location").val(), Desc: $("#Desc").val(), Grps: $("#Grps").val(), Amount: $("#Amount").val(), id: $("#Id").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Meeting Updated.");
+                                window.location.href = "@Url.Action("ViewMeeting", "Admin")";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+

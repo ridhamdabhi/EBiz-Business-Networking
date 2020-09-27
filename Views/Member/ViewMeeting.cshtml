@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Ebiz.Models.MeetingMst>
+@{
+    ViewBag.Title = "ViewMeeting";
+    Layout = "~/Views/Shared/_Member.cshtml";
+    var MeetMem = (List<Ebiz.Models.MeetingMemberMst>)ViewBag.MeetMem;
+    var Guest = (List<Ebiz.Models.GuestMaster>)ViewBag.Guest;
+    //var MeetingId = ViewBag.MeetingId;
+    //var Grps = (List<Ebiz.Models.GrpMemberMst>)ViewBag.Grps;
+    //var MemGrps = Grps.Where(q => q.MemberId == Convert.ToInt32(Session["UserID"])).Select(q=>q.GroupId).ToList();
+    //var MemMeets = Model.Where();
+
+}
+
+<h2>View Meeting</h2>
+
+@*<a href="@Url.Action("","",new { id=res.GrpId})">Join Now</a>*@
+
+
+@*<a href="@Url.Action("referMemberToMeeting","Member",new { id=res.UserId,MeetingId = MeetingId })">Join Now</a>*@
+
+
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Meeting ID</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Group ID</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+    </thead>@*Model.Contains(q.Grps.Where(q=>q.MemberId==Convert.ToInt32(Session["UserID"])))*@
+    <tbody>
+        @foreach (var res in Model)
+        {
+           
+                var exist = MeetMem.Where(q => q.MeetingId == res.Id && q.MemberId == Convert.ToInt32(Session["UserID"])).Select(q=>q.Id);
+            
+            <tr>
+                <td>@res.Id</td>
+                <td>@res.Date</td>
+                <td>@res.Location</td>
+                <td>@res.Desc</td>
+                <td>@res.GrpId</td>
+                <td>@res.Amount</td>
+                <td>
+                   
+                    @if (exist != null)
+                    {
+                       <div>Joined.</div>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("JoinMeet","Member",new { id = res.Id })">JOIN</a>
+                    }
+                    
+                </td>
+                @if (Guest.Where(q => q.MeetingId == res.Id).FirstOrDefault() == null)
+                {
+                    <td>
+                        <a href="@Url.Action("BringGuest","Member",new { id = res.Id })">Bring Guest</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                       <b>Guest Added.</b> 
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EbizEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BusinessCatMst">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="CommunicationMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="Msg" Type="varchar(max)" />
+    <Property Name="GrpId" Type="int" />
+  </EntityType>
+  <EntityType Name="ComplainMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="CustId" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="GrpId" Type="int" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="FeedbackMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="Feedback" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="GrpMemberMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="GroupId" Type="int" />
+  </EntityType>
+  <EntityType Name="GrpMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Desc" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="GuestMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="MeetingId" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="10" />
+    <Property Name="EmailId" Type="varchar" MaxLength="50" />
+    <Property Name="CatId" Type="int" />
+  </EntityType>
+  <EntityType Name="MeetingMemberMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="MeetingId" Type="int" />
+  </EntityType>
+  <EntityType Name="MeetingMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Location" Type="varchar(max)" />
+    <Property Name="Desc" Type="varchar(max)" />
+    <Property Name="GrpId" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="ReferralMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="GrpId" Type="int" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="ReferToId" Type="int" />
+  </EntityType>
+  <EntityType Name="RequestForAddMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="ReferId" Type="int" />
+    <Property Name="GrpId" Type="int" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNo" Type="varchar" MaxLength="10" />
+    <Property Name="EmailId" Type="varchar" MaxLength="100" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="PinCode" Type="varchar" MaxLength="6" />
+    <Property Name="CatId" Type="int" />
+  </EntityType>
+  <EntityType Name="VotingMst">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GrpMemberId" Type="int" />
+    <Property Name="MemberId" Type="int" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="EbizEntitiesModelStoreContainer">
+    <EntitySet Name="BusinessCatMst" EntityType="Self.BusinessCatMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommunicationMst" EntityType="Self.CommunicationMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComplainMaster" EntityType="Self.ComplainMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FeedbackMaster" EntityType="Self.FeedbackMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GrpMemberMst" EntityType="Self.GrpMemberMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GrpMst" EntityType="Self.GrpMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GuestMaster" EntityType="Self.GuestMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingMemberMst" EntityType="Self.MeetingMemberMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MeetingMst" EntityType="Self.MeetingMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReferralMst" EntityType="Self.ReferralMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestForAddMember" EntityType="Self.RequestForAddMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VotingMst" EntityType="Self.VotingMst" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

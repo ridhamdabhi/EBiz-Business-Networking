@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@*@HttpContext.Current.Session["Name"].ToString()*@
+<h1>Welcome @Session["Name"].ToString()</h1>
+
+    <br />
+    <div>
+        <button type="button" name="AddCategory" onclick="window.location.href='@Url.Action("AddCat", "Admin")'" id="AddCategory" class="btn btn-general btn-white mybtn">Add Category</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ViewCategory" onclick="window.location.href='@Url.Action("ViewCat", "Admin")'" id="ViewCategory" class="btn btn-general btn-white mybtn">View Category</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ViewComplaint" onclick="window.location.href='@Url.Action("ViewComplain", "Admin")'" id="ViewComplaint" class="btn btn-general btn-white mybtn">View Complain</button>
+    </div>
+
+    <div>
+        <button type="button" name="ViewCustomer" onclick="window.location.href='@Url.Action("ViewCust", "Admin")'" id="ViewCustomer" class="btn btn-general btn-white mybtn">View Customer</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ViewFeedback" onclick="window.location.href='@Url.Action("ViewFeed", "Admin")'" id="ViewFeedback" class="btn btn-general btn-white mybtn">View Feedback</button>
+    </div>
+    
+    <div>
+        <button type="button" name="AddGrp" onclick="window.location.href='@Url.Action("AddGrp", "Admin")'" id="AddGrp" class="btn btn-general btn-white mybtn">Add Group</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ViewGrp" onclick="window.location.href='@Url.Action("ViewGrp", "Admin")'" id="ViewGrp" class="btn btn-general btn-white mybtn">View Group</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ChangePass" onclick="window.location.href='@Url.Action("ChangePass", "Admin")'" id="ChangePass" class="btn btn-general btn-white mybtn">Change Password</button>
+    </div>
+    
+    <div>
+        <button type="button" name="OrganizeMeeting" onclick="window.location.href='@Url.Action("OrganizeMeeting", "Admin")'" id="OrganizeMeeting" class="btn btn-general btn-white mybtn">Organize Meeting</button>
+    </div>
+    
+    <div>
+        <button type="button" name="ViewMeeting" onclick="window.location.href='@Url.Action("ViewMeeting", "Admin")'" id="ViewMeeting" class="btn btn-general btn-white mybtn">View Meeting</button>
+    </div>

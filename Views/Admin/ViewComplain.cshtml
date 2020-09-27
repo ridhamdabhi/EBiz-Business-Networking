@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "ViewComplain";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+           
+            <th>Date</th>
+            <th>MemberID</th>
+            <th>Group ID</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                
+                <td>@res.Date</td>
+                <td>@res.CustId</td>
+                
+                <td>@res.GrpId</td>
+                <td>@res.Description</td>
+               
+                    @if (res.Status == 0)
+                    {
+                        <td><a href="@Url.Action("SolveComp", "Admin", new { id = res.Id })">PENDING</a></td>
+                    }
+                    else
+                    {
+                        <td>RESOLVE.</td>
+                    }
+              
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

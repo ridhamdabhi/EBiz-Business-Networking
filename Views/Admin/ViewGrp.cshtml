@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Ebiz.Models.GrpMst>
+@{
+    ViewBag.Title = "ViewGrp";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Group ID</th>
+            <th>Name</th>
+            <th>Desc</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.Id</td>
+                <td>@res.Name</td>
+                <td>@res.Desc</td>
+                <td>
+                    <a href="@Url.Action("EdtGrp","Admin",new { id = res.Id })">EDIT</a>&nbsp;
+                    <a href="@Url.Action("DeleteGrp","Admin",new { id = res.Id })">DELETE</a>
+                    <a href="@Url.Action("ViewGrpMember","Admin",new { id = res.Id })">View Grp Members</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

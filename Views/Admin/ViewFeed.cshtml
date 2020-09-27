@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Ebiz.Models.FeedbackMaster>
+@{
+    ViewBag.Title = "ViewFeed";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var Leader = (List<Ebiz.Models.UserMaster>)ViewBag.Leader;
+    var Member = (List<Ebiz.Models.UserMaster>)ViewBag.Member;
+}
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Feedback ID</th>
+            <th>Date</th>
+            <th>Customer ID</th>
+            <th>Feedback</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.Id</td>
+                <td>@res.Date</td>
+                <td>
+                    @*@Member.Where(q => q.UserId == res.CustomerId).Select(q => q.Name).FirstOrDefault(); *@  
+
+                    @foreach (var res1 in Member)
+                    {
+                        if (res1.UserId == res.CustomerId)
+                        {
+                            <label>@res1.Name</label>
+                        }
+                    }
+
+
+                    @foreach (var res2 in Leader)
+                    {
+                        if (res2.UserId == res.CustomerId)
+                        {
+                            <label>@res2.Name</label>
+                        }
+                    }
+
+                </td>
+                <td>@res.Feedback</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

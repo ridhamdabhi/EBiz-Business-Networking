@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ViewReferrals";
+    Layout = "~/Views/Shared/_Member.cshtml";
+    var Referrals = (List<Ebiz.Models.ReferralMst>)ViewBag.Referrals;
+    var User = (List<Ebiz.Models.UserMaster>)ViewBag.User;
+}
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Referrer ID</th>
+            <th>Referrer Name</th>
+            <th>Client Name</th>
+            <th>Client Email</th>
+            <th>Client Contact</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Referrals)
+        {
+
+            <tr>
+                <td>@res.MemberId</td>
+                <td>@User.Where(q => q.UserId == res.MemberId).Select(q => q.Name).FirstOrDefault();</td>
+                <td>@res.Name</td>
+                <td>@res.Email</td>
+                <td>@res.PhoneNo</td>
+                <td>
+                        <a href="@Url.Action("ReviewReferral","Member",new { id = res.Id })">Review</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

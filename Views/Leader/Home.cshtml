@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Leader.cshtml";
+}
+
+<h1>Welcome @Session["Name"].ToString()</h1>
+
+<br />
+<div>
+    <button type="button" name="ProvideFeedback" onclick="window.location.href='@Url.Action("ProvideFeed", "Leader")'" id="ProvideFeedback" class="btn btn-general btn-white mybtn">ProvideFeedback</button>
+</div>
+<br />
+<div>
+    <button type="button" name="AddComp" onclick="window.location.href='@Url.Action("AddComplaint", "Leader")'" id="AddComp" class="btn btn-general btn-white mybtn">Register Complaint</button>
+</div>
+<br />
+<div class="col-md-12 seventh-button mt-5">
+    <button type="button" name="ViewGroup" onclick="window.location.href='@Url.Action("ViewGrp", "Leader")'" id="ViewGroup" class="btn btn-general btn-white mybtn">View Group</button>
+</div>
+<br />
+<div>
+    <button type="button" name="ChangePass" onclick="window.location.href='@Url.Action("ChangePass", "Leader")'" id="ChangePass" class="btn btn-general btn-white mybtn">Change Password</button>
+</div>
+<br />

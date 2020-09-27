@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "AddGrpMember";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var Grps = (List<Ebiz.Models.GrpMst>)ViewBag.Grps;
+    var Users = (List<Ebiz.Models.UserMaster>)ViewBag.Users;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="cotact-area">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="title-area">
+                            <h2 class="title">Add Group Member</h2>
+                            <span class="line"></span>
+
+                        </div>
+                    </div>
+                    <div class="contact-area-right">
+                        <form id="addmem-form" name="addmem-form" class="comments-form contact-form" novalidate>
+                            @*<div class="form-group">
+                                <label for="exampleSelect1">Select Group</label>
+                                <select class="form-control" name="Grps" id="Grps">
+                                    <option value="">Select</option>
+                                    @foreach (var res in Grps)
+                                    {
+                                        <option value="@res.Id">@res.Name</option>
+                                    }
+                                </select>
+                            </div>*@
+                            
+                            <div class="form-group">
+                                <label for="exampleSelect1">Select User</label>
+                                <select class="form-control" name="Users" id="Users">
+                                    <option value="">Select</option>
+                                    @foreach (var res in Users)
+                                    {
+                                        <option value="@res.UserId">@res.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button id="addmem" name="addmem" class="comment-btn">Add</button>
+                            </div>
+                             <span id="ErrorMsg" style="color:red"></span>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        $(window).bind("beforeunload", function () {
+            return confirm("Do you really want to close?");
+        })
+        $(function () {
+
+            var $validator = $("#addmem-form").validate({
+                // Rules for form validation
+                rules: {
+                    //Grps: {
+                    //                required: true
+                    //},
+                    Users: {
+                                   required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    //Grps: {
+                    //    required: "Please Select Group"
+                    //},
+                    Users: {
+                        required: "Please Select a User"
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#addmem").click(function () {
+                $("#ErrorMsg").html();
+                if ($("#addmem-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("AddGroupMember", "Admin")',
+                        data: {
+                            UserID: $("#Users").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Member Added.");
+                                window.location.href = "@Url.Action("ViewGrpMember", "Admin", new { id = Convert.ToInt32(Session["GrpID"]) })";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Ebiz.Models.BusinessCatMst>
+@{
+    ViewBag.Title = "ViewCat";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.CategoryId</td>
+                <td>@res.CategoryName</td>
+                <td>
+                    <a href="@Url.Action("EdtCat","Admin",new { id = res.CategoryId })">Edit</a>
+                    <a href="@Url.Action("DeleteCat","Admin",new { id = res.CategoryId })">Delete</a>                
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

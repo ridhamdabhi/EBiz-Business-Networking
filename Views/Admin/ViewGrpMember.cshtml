@@ -1,0 +1,63 @@
+﻿@*@model IEnumerable<Ebiz.Models.GrpMemberMst>*@
+@{
+    ViewBag.Title = "ViewGrpMember";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var User = (List<Ebiz.Models.UserMaster>)ViewBag.User;
+    var Cat = (List<Ebiz.Models.BusinessCatMst>)ViewBag.Cat;
+    var GrpMem = (List<Ebiz.Models.GrpMemberMst>)ViewBag.GrpMem;
+}
+
+<br /><center>
+<div>
+    <button type="button" name="AddMember" onclick="window.location.href='@Url.Action("AddGrpMember", "Admin")'" id="AddMember" class="btn btn-boxs btn-4">Add Member</button>
+</div></center>
+<br />
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>Name</th>
+            <th>Phone No</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        @foreach (var res in GrpMem)
+        {
+            <tr>
+                <td>@res.MemberId</td>
+
+                @foreach(var res1 in User)
+                {
+                    if(res1.UserId == res.MemberId)
+                    {
+                        <td>@res1.Name</td>
+                        <td>@res1.EmailId</td>
+                        <td>@res1.PhoneNo</td>
+                        foreach(var res2 in Cat.Where(q => q.CategoryId == res1.CatId))
+                        {
+                            <td>@res2.CategoryName</td>
+                        }
+                    }
+                }
+                <td>
+                    <a href="@Url.Action("RemoveMember","Admin",new { id = res.Id})">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "ViewMeeting";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Desc</th>
+            <th>Group ID</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.Id</td>
+                <td>@res.Date</td>
+                <td>@res.Location</td>
+                <td>@res.Desc</td>
+                <td>@res.GrpId</td>
+                <td>@res.Amount</td>
+                <td>
+                    <a href="@Url.Action("EditMeet","Admin",new { id = res.Id })">EDIT</a>&nbsp;
+                    <a href="@Url.Action("DeleteMeet","Admin",new { id = res.Id })">DELETE</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+}

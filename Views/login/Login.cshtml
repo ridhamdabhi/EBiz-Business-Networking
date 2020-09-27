@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_login.cshtml";
+}
+
+<div id="div-forms">
+    <form id="login-form" name="login-form" novalidate>
+        <br /><br /><br /><br />
+        <h3 class="text-center">Login</h3>
+        <center>
+            <div class="modal-body">
+                <label for="username">
+                    Email Id
+                </label>
+                    <div>
+                        <input id="LEmailID" class="form-control" name="LEmailID" maxlength="50" type="email" width="20" placeholder="Enter Email Id " style="width:400px" required>
+                    </div>
+                <br />
+                <label for="username">Password</label>
+                <div>
+                    <input id="LPassword" class="form-control" name="LPassword" maxlength="50" type="password" style="width:400px" placeholder="Enter password" required>
+                </div>
+                
+            </div>
+            <div class="modal-footer text-center">
+                <div>
+                    <button type="button" name="login" id="login" class="btn btn-general btn-white">Login</button>
+                </div>
+                <div>
+                    <button type="button" name="login" onclick="window.location.href='@Url.Action("Reg", "login")'" id="login" class="btn btn-general btn-white">Register</button>
+                </div>
+                
+            </div>
+            <span id="ErrorMsg" style="color:red"></span>
+        </center>
+        <br /><br /><br /><br />
+    </form>
+    
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        //$(window).bind("beforeunload", function () {
+        //    return confirm("Do you really want to close?");
+        //})
+        $(function () {
+
+            var $validator = $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+
+                    LEmailID: {
+                        required: true,
+                        email : true
+                    },
+                    LPassword: {
+                        required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    LEmailID: {
+                        required: 'Please enter your EmailID',
+                        email : 'Please enter correct EmailID'
+                    },
+                    LPassword: {
+                        required: 'Please enter your Password'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#login").click(function () {
+
+                if ($("#login-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("ChkLogin", "login")',
+                        data: {
+                            EmailID: $("#LEmailID").val(), Password: $("#LPassword").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() != "Error") {
+                                if (res.toString() == '1') {
+                                    window.location.href = "@Url.Action("Home", "Admin")";
+                                }
+                                else if (res.toString() == '2') {
+                                    window.location.href = "@Url.Action("Home", "Leader")";
+                                }
+                                else if (res.toString() == '3') {
+                                    window.location.href = "@Url.Action("Home", "Member")";
+                                }
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

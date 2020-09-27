@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "AddCat";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="row">
+<div class="col-md-12">
+    <div class="cotact-area">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-12">
+                    <div class="title-area">
+                        <h2 class="title">Add Category</h2>
+                        <span class="line"></span>
+
+                    </div>
+                </div>
+                <div class="contact-area-right">
+                    <form id="addcat-form" name="addcat-form" class="comments-form contact-form" novalidate>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="Name" name="Name" maxlength="100" placeholder="Category Name">
+                        </div>
+                        
+                        <div>
+                            <button type="button" name="addcat" id="addcat" class="btn btn-general btn-white">Add Category</button>
+                        </div>
+
+                        <span id="ErrorMsg" style="color:red"></span>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        $(window).bind("beforeunload", function () {
+            return confirm("Do you really want to close?");
+        })
+        $(function () {
+
+            var $validator = $("#addcat-form").validate({
+                // Rules for form validation
+                rules: {
+                    Name: {
+                        required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    Name: {
+                        required: 'Please enter your Name'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#addcat").click(function () {
+                $("#ErrorMsg").html();
+                if ($("#addcat-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("AddCategory", "Admin")',
+                        data: {
+                            Name: $("#Name").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Category Added.");
+                                window.location.href = "@Url.Action("Home", "Admin")";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+

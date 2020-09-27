@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_Leader.cshtml";
+}
+
+<div id="div-forms">
+    <form id="changepass-form" name="changepass-form" novalidate>
+        <br /><br /><br />
+        <h3 class="text-center">Change Password</h3>
+        <center>
+            <div class="modal-body">
+                <br />
+                <div>
+                    <input id="cpass" class="form-control" type="password" name="cpass" maxlength="50" width="20" placeholder="Current Password" style="width:400px">
+                </div>
+                <br />
+                <br />
+                <div>
+                    <input id="npass" class="form-control" name="npass" maxlength="50" type="password" style="width:400px" placeholder="New Password">
+                </div>
+                <br />
+                <div>
+                    <input id="cnpass" class="form-control" name="cnpass" maxlength="50" type="password" style="width:400px" placeholder="Confirm New Password">
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <div>
+                    <button type="button" name="change" id="change" class="btn btn-general btn-white">Change Password</button>
+                </div>
+            </div>
+            <span id="ErrorMsg" style="color:red"></span>
+        </center>
+        <br /><br /><br />
+    </form>
+
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        //$(window).bind("beforeunload", function () {
+        //    return confirm("Do you really want to close?");
+        //})
+        $(function () {
+
+            var $validator = $("#changepass-form").validate({
+                // Rules for form validation
+                rules: {
+
+                    cpass: {
+                        required: true
+                    },
+                    npass: {
+                        required: true
+                    },
+                    cnpass: {
+                        required: true,
+                        equalTo: '#npass'
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    cpass: {
+                        required: 'Please Enter Current Password'
+                    },
+                    npass: {
+                        required: 'Please Enter New Password'
+                    },
+                    cnpass: {
+                        required: 'Please Confirm Password'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#change").click(function () {
+
+                if ($("#changepass-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("ChangePassword", "Leader")',
+                        data: {
+                            cpass: $("#cpass").val(), npass: $("#npass").val(), cnpass: $("#cnpass").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Password Changed.");
+                                window.location.href = "@Url.Action("Home", "Leader")";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
+
+

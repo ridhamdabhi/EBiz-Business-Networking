@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EbizEntitiesModelStoreContainer" CdmEntityContainer="EbizEntitiesEntities1">
+    <EntitySetMapping Name="BusinessCatMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.BusinessCatMst">
+        <MappingFragment StoreEntitySet="BusinessCatMst">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommunicationMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.CommunicationMst">
+        <MappingFragment StoreEntitySet="CommunicationMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Msg" ColumnName="Msg" />
+          <ScalarProperty Name="GrpId" ColumnName="GrpId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComplainMasters">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.ComplainMaster">
+        <MappingFragment StoreEntitySet="ComplainMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustId" ColumnName="CustId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="GrpId" ColumnName="GrpId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeedbackMasters">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.FeedbackMaster">
+        <MappingFragment StoreEntitySet="FeedbackMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrpMemberMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.GrpMemberMst">
+        <MappingFragment StoreEntitySet="GrpMemberMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrpMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.GrpMst">
+        <MappingFragment StoreEntitySet="GrpMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuestMasters">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.GuestMaster">
+        <MappingFragment StoreEntitySet="GuestMaster">
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingMemberMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.MeetingMemberMst">
+        <MappingFragment StoreEntitySet="MeetingMemberMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MeetingId" ColumnName="MeetingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.MeetingMst">
+        <MappingFragment StoreEntitySet="MeetingMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="GrpId" ColumnName="GrpId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferralMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.ReferralMst">
+        <MappingFragment StoreEntitySet="ReferralMst">
+          <ScalarProperty Name="ReferToId" ColumnName="ReferToId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="GrpId" ColumnName="GrpId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestForAddMembers">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.RequestForAddMember">
+        <MappingFragment StoreEntitySet="RequestForAddMember">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="ReferId" ColumnName="ReferId" />
+          <ScalarProperty Name="GrpId" ColumnName="GrpId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="CatId" ColumnName="CatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VotingMsts">
+      <EntityTypeMapping TypeName="EbizEntitiesModel.VotingMst">
+        <MappingFragment StoreEntitySet="VotingMst">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GrpMemberId" ColumnName="GrpMemberId" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

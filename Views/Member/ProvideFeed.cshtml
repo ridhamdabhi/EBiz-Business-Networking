@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "ProvideFeed";
+    Layout = "~/Views/Shared/_Member.cshtml";
+}
+
+<<div class="row">
+    <div class="col-md-12">
+        <div class="cotact-area">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="title-area">
+                            <h2 class="title">PROVIDE FEEDBACK</h2>
+                            <span class="line"></span>
+
+                        </div>
+                    </div>
+                    <div class="contact-area-right">
+                        <form id="providefeed-form" name="providefeed-form" class="comments-form contact-form" novalidate>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="feedback" name="feedback" maxlength="100" placeholder="Enter feedback">
+                            </div>
+                           
+                            <div>
+                                <button type="button" name="profeed" id="profeed" class="btn btn-general btn-white">PROVIDE FEEDBACK</button>
+                            </div>
+
+                            <span id="ErrorMsg" style="color:red"></span>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        $(window).bind("beforeunload", function () {
+            return confirm("Do you really want to close?");
+        })
+        $(function () {
+
+            var $validator = $("#providefeed-form").validate({
+                // Rules for form validation
+                rules: {
+                   feedback : {
+                        required: true
+                    }
+                   
+                },
+
+                // Messages for form validation
+                messages: {
+                    feedback : {
+                        required: 'Please enter your Feedback'
+                    }
+
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#profeed").click(function () {
+                $("#ErrorMsg").html();
+                if ($("#providefeed-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("ProvideFeedback", "Member")',
+                        data: {
+                            feedback: $("#feedback").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Feedback Provided.");
+                                window.location.href = "@Url.Action("Home", "Member")";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+

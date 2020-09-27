@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "AddComplaint";
+    Layout = "~/Views/Shared/_Member.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="cotact-area">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="title-area">
+                            <h2 class="title">Complaint Registration</h2>
+                            <span class="line"></span>
+
+                        </div>
+                    </div>
+                    <div class="contact-area-right">
+                        <form id="addcomp-form" name="addcomp-form" class="comments-form contact-form" novalidate>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Desc" name="Desc" maxlength="100" placeholder="Description">
+                            </div>
+                            <div>
+                                <button type="button" name="addcomp" id="addcomp" class="btn btn-general btn-white">Register Complaint</button>
+                            </div>
+
+                            <span id="ErrorMsg" style="color:red"></span>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section reg{
+    <script type="text/javascript">
+
+        $(window).bind("beforeunload", function () {
+            return confirm("Do you really want to close?");
+        })
+        $(function () {
+
+            var $validator = $("#addgrp-form").validate({
+                // Rules for form validation
+                rules: {
+                    Desc: {
+                        required: true
+                    }
+
+                },
+
+                // Messages for form validation
+                messages: {
+                    Desc: {
+                        required: 'Please Enter Description'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+            $("#addcomp").click(function () {
+                $("#ErrorMsg").html();
+                if ($("#addcomp-form").valid()) {
+                    $.ajax({
+                        type: "post",
+                        datatype: "json",
+                        url: '@Url.Action("AddComp", "Member")',
+                        data: {
+                            Desc: $("#Desc").val()
+                        },
+                        success: function (res) {
+                            if (res.toString() == "success") {
+                                alert("Complaint Registered.");
+                                window.location.href = "@Url.Action("Home", "Member")";
+                            }
+                            else {
+                                $("#ErrorMsg").html(res.toString());
+                            }
+                        },
+                        error: function (res) {
+                            $("#ErrorMsg").html('Error While Processing Data');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+
+

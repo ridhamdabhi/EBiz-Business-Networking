@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Ebiz.Models.UserMaster>
+@{
+    ViewBag.Title = "ViewCust";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>PinCode</th>
+            <th>PhoneNo</th>
+            <th>EmailID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.Name</td>
+                <td>@res.Address</td>
+                <td>@res.PinCode</td>
+                <td>@res.PhoneNo</td>
+                <td>@res.EmailId</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section reg{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+    }
